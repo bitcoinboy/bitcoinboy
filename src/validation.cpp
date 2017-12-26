@@ -1306,6 +1306,20 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight)
     UpdateCoins(tx, inputs, txundo, nHeight);
 }
 
+
+/** Check if BCB has activated **/
+bool IsBCBForkEnabled(const Consensus::Params& params, const CBlockIndex *pindex)
+{
+    return pindex->nHeight >= params.BCBForkHeight;
+}
+
+
+/** Check if BCB fork height has pass **/
+bool IsBCBForkHeight(const Consensus::Params& params, const int &height);
+{
+    return params.BCBForkHeight == height;
+}
+
 bool CScriptCheck::operator()() {
     const CScript &scriptSig = ptxTo->vin[nIn].scriptSig;
     const CScriptWitness *witness = &ptxTo->vin[nIn].scriptWitness;
