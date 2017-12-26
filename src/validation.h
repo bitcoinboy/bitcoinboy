@@ -325,6 +325,14 @@ int VersionBitsTipStateSinceHeight(const Consensus::Params& params, Consensus::D
 /** Apply the effects of this transaction on the UTXO set represented by view */
 void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight);
 
+
+/** Check if BCB has activated **/
+bool IsBCBForkEnabled(const Consensus::Params& params, const CBlockIndex *pindex);
+
+
+/** Check if BCB fork height has pass **/
+bool IsBCBForkHeight(const Consensus::Params& params, const int &height); 
+
 /** Transaction validation functions */
 
 /**
