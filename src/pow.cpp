@@ -4,6 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <pow.h>
+#include <validation.h>
 
 #include <arith_uint256.h>
 #include <chain.h>
@@ -14,6 +15,12 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
     assert(pindexLast != nullptr);
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+
+    // lower difficulty for forking range
+    const int nCurHeight = pindexLast->nHeight + 1;
+    if (IsBCBForkEnabled(params, pindexLast) && nCurHeight - 10 < params.BCBForkHeight) {
+        return nProofOfWorkLimit;
+    }
 
     // Only change once per difficulty adjustment interval
     if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)

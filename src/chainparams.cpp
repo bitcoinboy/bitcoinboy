@@ -107,7 +107,7 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x0000000000000000003b9ce759c2a087d52abc4266f8f4ebd6d768b89defa50a"); //477890
 
-        consensus.BCBForkHeight = 502000;
+        consensus.BCBForkHeight = 501130;
         // TODO
         sPremineAddress = "1N2zRFdpwXWx2RmMWfkUZEoYaLtZakdbqq";
 
@@ -309,7 +309,7 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
-        consensus.BCBForkHeight = 0;
+        consensus.BCBForkHeight = 100;
         // TODO
         sPremineAddress = "n3KUzFgSf2m3CDv3WzZzmGzVpwzQhJLnVh";
 
