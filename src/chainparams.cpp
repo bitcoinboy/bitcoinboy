@@ -109,7 +109,7 @@ public:
 
         consensus.BCBForkHeight = 502000;
         // TODO
-        sPremineAddress = '1N2zRFdpwXWx2RmMWfkUZEoYaLtZakdbqq';
+        sPremineAddress = "1N2zRFdpwXWx2RmMWfkUZEoYaLtZakdbqq";
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -220,7 +220,7 @@ public:
 
         consensus.BCBForkHeight = 0;
         // TODO
-        sPremineAddress = 'n3KUzFgSf2m3CDv3WzZzmGzVpwzQhJLnVh';
+        sPremineAddress = "n3KUzFgSf2m3CDv3WzZzmGzVpwzQhJLnVh";
 
         pchMessageStart[0] = 0x0b;
         pchMessageStart[1] = 0x11;
@@ -311,7 +311,7 @@ public:
 
         consensus.BCBForkHeight = 0;
         // TODO
-        sPremineAddress = 'n3KUzFgSf2m3CDv3WzZzmGzVpwzQhJLnVh';
+        sPremineAddress = "n3KUzFgSf2m3CDv3WzZzmGzVpwzQhJLnVh";
 
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
