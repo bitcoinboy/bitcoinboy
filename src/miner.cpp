@@ -166,7 +166,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     if (IsBCBForkHeight(chainparams.GetConsensus(), nHeight)) {
         CTxDestination addr = DecodeDestination(chainparams.GetPremineAddress());
         coinbaseTx.vout[0].scriptPubKey = GetScriptForDestination(addr);
-        coinbaseTx.vout[0].nValue = 2520000 * COIN;
+        coinbaseTx.vout[0].nValue = 210000 * COIN;
     } else {
         coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
         coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
