@@ -329,6 +329,7 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight);
 /** Check if BCB has activated **/
 bool IsBCBForkEnabled(const Consensus::Params& params, const CBlockIndex *pindex);
 
+bool IsBCBForkEnabled(const Consensus::Params& params, const int height);
 
 /** Check if BCB fork height has pass **/
 bool IsBCBForkHeight(const Consensus::Params& params, const int &height); 

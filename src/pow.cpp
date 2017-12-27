@@ -10,6 +10,7 @@
 #include <chain.h>
 #include <primitives/block.h>
 #include <uint256.h>
+#include <util.h>
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
@@ -18,7 +19,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     // lower difficulty for forking range
     const int nCurHeight = pindexLast->nHeight + 1;
-    if (IsBCBForkEnabled(params, pindexLast) && nCurHeight - 10 < params.BCBForkHeight) {
+    LogPrintf("GetNextWorkRequired: nCurHeight: %d limit: %d\n", nCurHeight, nProofOfWorkLimit);
+    if (IsBCBForkEnabled(params, nCurHeight) && nCurHeight - 10 < params.BCBForkHeight) {
         return nProofOfWorkLimit;
     }
 
@@ -85,6 +87,8 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
     arith_uint256 bnTarget;
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+
+    LogPrintf("CheckProofOfWork: hash: %s nBits: %s\n", hash.ToString(), ArithToUint256(bnTarget).ToString());
 
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))

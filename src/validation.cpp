@@ -1313,6 +1313,10 @@ bool IsBCBForkEnabled(const Consensus::Params& params, const CBlockIndex *pindex
     return pindex->nHeight >= params.BCBForkHeight;
 }
 
+bool IsBCBForkEnabled(const Consensus::Params& params, const int height)
+{
+    return height >= params.BCBForkHeight;
+}
 
 /** Check if BCB fork height has pass **/
 bool IsBCBForkHeight(const Consensus::Params& params, const int &height)
