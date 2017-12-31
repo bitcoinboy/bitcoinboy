@@ -8,7 +8,6 @@
 /**
  * network protocol versioning
  */
-
 // ! new start version from 70015->70016
 static const int PROTOCOL_VERSION = 70016;
 
