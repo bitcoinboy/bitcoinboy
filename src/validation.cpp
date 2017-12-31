@@ -1313,18 +1313,18 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight)
 /** Check if BCB has activated **/
 bool IsBCBForkEnabled(const Consensus::Params& params, const CBlockIndex *pindex)
 {
-    return pindex->nHeight >= params.BCBForkHeight;
+    return pindex->nHeight > params.BCBForkHeight;
 }
 
 bool IsBCBForkEnabled(const Consensus::Params& params, const int height)
 {
-    return height >= params.BCBForkHeight;
+    return height > params.BCBForkHeight;
 }
 
 /** Check if BCB fork height has pass **/
 bool IsBCBForkHeight(const Consensus::Params& params, const int &height)
 {
-    return params.BCBForkHeight == height;
+    return params.BCBForkHeight + 1 == height;
 }
 
 bool CScriptCheck::operator()() {
