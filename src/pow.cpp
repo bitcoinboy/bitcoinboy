@@ -19,9 +19,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     // lower difficulty for forking range
     const int nCurHeight = pindexLast->nHeight + 1;
-    LogPrintf("GetNextWorkRequired: nCurHeight: %d limit: %d\n", nCurHeight, nProofOfWorkLimit);
-    if (IsBCBForkEnabled(params, nCurHeight) && nCurHeight - 10 < params.BCBForkHeight) {
-        return nProofOfWorkLimit;
+    if (IsBCBForkEnabled(params, nCurHeight) && nCurHeight == params.BCBForkHeight + 1) {
+        return UintToArith256(uint256S("0000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffff")).GetCompact();
     }
 
     // Only change once per difficulty adjustment interval
