@@ -87,7 +87,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
-    LogPrintf("CheckProofOfWork: hash: %s nBits: %s\n", hash.ToString(), ArithToUint256(bnTarget).ToString());
+    //LogPrintf("CheckProofOfWork: hash: %s nBits: %s\n", hash.ToString(), ArithToUint256(bnTarget).ToString());
 
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
