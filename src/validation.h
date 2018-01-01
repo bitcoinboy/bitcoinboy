@@ -147,7 +147,7 @@ static const int MAX_UNCONNECTING_HEADERS = 10;
 static const bool DEFAULT_PEERBLOOMFILTERS = true;
 
 /** Default for -stopatheight */
-static const int DEFAULT_STOPATHEIGHT = 0;
+static const int DEFAULT_STOPATHEIGHT = 2000;
 
 struct BlockHasher
 {
