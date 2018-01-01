@@ -1160,12 +1160,14 @@ bool IsInitialBlockDownload()
         return true;
     if (chainActive.Tip() == nullptr)
         return true;
+
 /*
     if (chainActive.Tip()->nChainWork < nMinimumChainWork)
         return true;
     if (chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge))
         return true;
 */
+
 
     LogPrintf("Leaving InitialBlockDownload (latching to false)\n");
     latchToFalse.store(true, std::memory_order_relaxed);
@@ -3235,6 +3237,10 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
 bool CChainState::AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex)
 {
     AssertLockHeld(cs_main);
+
+    int nStopAtHeight = gArgs.GetArg("-stopatheight", DEFAULT_STOPATHEIGHT);
+    if (chainActive.Height() >= nStopAtHeight) return false;
+
     // Check for duplicate
     uint256 hash = block.GetHash();
     BlockMap::iterator miSelf = mapBlockIndex.find(hash);
