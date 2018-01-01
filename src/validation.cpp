@@ -1135,7 +1135,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
     if (halvings >= 64)
         return 0;
 
-    if (nHeight == consensusParams.BCBForkHeight + 1)
+    if (IsBCBForkHeight(consensusParams, nHeight))
         return 2100000 * COIN * COIN_SCALE;
 
     CAmount nSubsidy = 50 * COIN * COIN_SCALE;
@@ -1313,18 +1313,18 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight)
 /** Check if BCB has activated **/
 bool IsBCBForkEnabled(const Consensus::Params& params, const CBlockIndex *pindex)
 {
-    return pindex->nHeight > params.BCBForkHeight;
+    return pindex->nHeight >= params.BCBForkHeight;
 }
 
 bool IsBCBForkEnabled(const Consensus::Params& params, const int height)
 {
-    return height > params.BCBForkHeight;
+    return height >= params.BCBForkHeight;
 }
 
 /** Check if BCB fork height has pass **/
 bool IsBCBForkHeight(const Consensus::Params& params, const int &height)
 {
-    return params.BCBForkHeight + 1 == height;
+    return params.BCBForkHeight == height;
 }
 
 bool CScriptCheck::operator()() {
