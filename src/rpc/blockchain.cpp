@@ -896,9 +896,8 @@ UniValue pruneblockchain(const JSONRPCRequest& request)
     unsigned int height = (unsigned int) heightParam;
     unsigned int chainHeight = (unsigned int) chainActive.Height();
     //LogPrint(BCLog::RPC, "Heght: %d, chainHeight: %d", height, chainHeight);
-    std::string str = strprintf("Height: %d, chain: %d, after: %d", height, chainHeight, Params().PruneAfterHeight());
     if (chainHeight < Params().PruneAfterHeight())
-        throw JSONRPCError(RPC_MISC_ERROR, "Blockchain is too short for pruning." + str);
+        throw JSONRPCError(RPC_MISC_ERROR, "Blockchain is too short for pruning.");
     else if (height > chainHeight)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Blockchain is shorter than the attempted prune height.");
     else if (height > chainHeight - MIN_BLOCKS_TO_KEEP) {
@@ -1190,8 +1189,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     UniValue obj(UniValue::VOBJ);
     obj.push_back(Pair("chain",                 Params().NetworkIDString()));
     obj.push_back(Pair("blocks",                (int)chainActive.Height()));
-    obj.push_back(Pair("headers",                (int)chainActive.Height()));
-    //obj.push_back(Pair("headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1));
+    obj.push_back(Pair("headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1));
     obj.push_back(Pair("bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex()));
     obj.push_back(Pair("difficulty",            (double)GetDifficulty()));
     obj.push_back(Pair("mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast()));
