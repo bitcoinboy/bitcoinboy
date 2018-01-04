@@ -20,7 +20,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     // lower difficulty for forking range
     const int nCurHeight = pindexLast->nHeight + 1;
     if (IsBCBForkHeight(params, nCurHeight)) {
-        return UintToArith256(uint256S("0000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffff")).GetCompact();
+        return nProofOfWorkLimit;
     }
 
     // Only change once per difficulty adjustment interval
