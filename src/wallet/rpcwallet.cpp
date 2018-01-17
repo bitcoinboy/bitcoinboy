@@ -469,7 +469,7 @@ UniValue sendtoaddress(const JSONRPCRequest& request)
     }
 
     // Amount
-    CAmount nAmount = AmountFromValue(request.params[1]);
+    CAmount nAmount = AmountFromValue(request.params[1]) / COIN_SCALE;
     if (nAmount <= 0)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
 
@@ -897,7 +897,7 @@ UniValue movecmd(const JSONRPCRequest& request)
 
     std::string strFrom = AccountFromValue(request.params[0]);
     std::string strTo = AccountFromValue(request.params[1]);
-    CAmount nAmount = AmountFromValue(request.params[2]);
+    CAmount nAmount = AmountFromValue(request.params[2]) / COIN_SCALE;
     if (nAmount <= 0)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
     if (!request.params[3].isNull())
@@ -964,7 +964,7 @@ UniValue sendfrom(const JSONRPCRequest& request)
     if (!IsValidDestination(dest)) {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address");
     }
-    CAmount nAmount = AmountFromValue(request.params[2]);
+    CAmount nAmount = AmountFromValue(request.params[2]) / COIN_SCALE;
     if (nAmount <= 0)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
     int nMinDepth = 1;
@@ -1100,7 +1100,7 @@ UniValue sendmany(const JSONRPCRequest& request)
         destinations.insert(dest);
 
         CScript scriptPubKey = GetScriptForDestination(dest);
-        CAmount nAmount = AmountFromValue(sendTo[name_]);
+        CAmount nAmount = AmountFromValue(sendTo[name_]) / COIN_SCALE;
         if (nAmount <= 0)
             throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
         totalAmount += nAmount;
@@ -2674,7 +2674,7 @@ UniValue settxfee(const JSONRPCRequest& request)
     LOCK2(cs_main, pwallet->cs_wallet);
 
     // Amount
-    CAmount nAmount = AmountFromValue(request.params[0]);
+    CAmount nAmount = AmountFromValue(request.params[0]) / COIN_SCALE;
 
     payTxFee = CFeeRate(nAmount, 1000);
     return true;
